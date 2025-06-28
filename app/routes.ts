@@ -5,6 +5,6 @@ export default [
     // create separate layout for admin pages
     layout('routes/admin/admin-layout.tsx', [
         route('dashboard','routes/admin/dashboard.tsx'),
-        route('users','routes/admin/all-users.tsx')
+        route('users','routes/admin/users.tsx')
     ])
 ] satisfies RouteConfig;
