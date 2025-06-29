@@ -1,0 +1,9 @@
+-- React Router - loaded --
+- Loader is an asynchronous function tied to a route 
+and it runs before the routes component renders 
+and provides the component the data so that it can use the data
+immediately once it appears
+- makes the app feel faster and more structured because data fetching happens before the UI shows
+
+-- React Router - useLoaderData --
+- A function that gets data from the loader function of the nearest route

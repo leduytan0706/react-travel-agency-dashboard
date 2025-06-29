@@ -102,7 +102,7 @@
       @apply text-sm md:text-lg font-normal truncate text-gray-100;
     }
   }
-
+ 
   .trip {
     @apply flex flex-col gap-10 pb-20;
     section {
@@ -366,7 +366,7 @@
   }
 
   .status-column {
-    @apply flex justify-center items-center gap-1 w-[65px] py-[2px]  rounded-2xl mix-blend-multiply;
+    @apply m-auto flex justify-center items-center gap-1 w-[65px] py-[2px] rounded-2xl mix-blend-multiply;
   }
 
   .dashboard {
