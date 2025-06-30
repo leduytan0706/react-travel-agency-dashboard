@@ -2,9 +2,20 @@ import { Header } from 'components'
 import React from 'react'
 import {ColumnDirective, ColumnsDirective, GridComponent} from "@syncfusion/ej2-react-grids";
 import { users } from '~/constants';
-import { cn } from '~/lib/utils';
+import { cn, formatDate } from '~/lib/utils';
+import { getAllUsers } from '~/appwrite/auth';
+import type { Route } from './+types/users';
+import { spanToBaggageHeader } from '@sentry/react-router';
 
-const Users = () => {
+export const loader = async () => {
+  const {users, total} = await getAllUsers(10, 0);
+
+  return {users, total};
+}
+
+const Users = ({loaderData}: Route.ComponentProps) => {
+  const {users} = loaderData;
+
   return (
     <main className='all-users wrapper'>
       <Header 
@@ -27,6 +38,7 @@ const Users = () => {
                   src={props.imageUrl} 
                   alt="user"
                   className='rounded-full size-8 aspect-square' 
+                  referrerPolicy='no-referrer'
                 />
                 <span>{props.name}</span>
               </div>
@@ -35,21 +47,24 @@ const Users = () => {
           <ColumnDirective
             field="email" 
             headerText="Email Address" 
-            width="150"
+            width="200"
             textAlign="Left"
           />
           <ColumnDirective
-            field="dateJoined" 
+            field="joinedAt" 
             headerText="Joined At" 
             width="150"
             textAlign="Left"
+            template={({joinedAt}: UserData) => (
+              <span>{formatDate(joinedAt)}</span>
+            )}
           />
-          <ColumnDirective
+          {/* <ColumnDirective
             field="itineraryCreated" 
             headerText="Trips Created" 
             width="130"
             textAlign="Right"
-          />
+          /> */}
           <ColumnDirective
             field="status" 
             headerText="Type" 

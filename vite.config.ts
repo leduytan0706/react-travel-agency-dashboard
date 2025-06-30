@@ -3,12 +3,15 @@ import { sentryReactRouter, type SentryReactRouterBuildOptions } from "@sentry/r
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const sentryConfig: SentryReactRouterBuildOptions = {
   org: "tran-nhan-phat",
   project: "react-travelpal",
   // An auth token is required for uploading source maps.
-  authToken: import.meta.env.VITE_SENTRY_AUTH_TOKEN
+  authToken: process.env.VITE_SENTRY_AUTH_TOKEN
   // ...
 };
 

@@ -95,6 +95,13 @@ export const selectItems = [
   "budget",
 ] as (keyof TripFormData)[];
 
+export const selectPlaceholders = {
+  groupType: "Select a group type",
+  travelStyle: "Select your travel style",
+  interest: "Select one interest for your travel",
+  budget: "Select your budger preference",
+} as Record<keyof TripFormData, string>;
+
 export const comboBoxItems = {
   groupType: groupTypes,
   travelStyle: travelStyles,
