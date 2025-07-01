@@ -8,11 +8,13 @@ import { LayerDirective, LayersDirective, MapsComponent } from '@syncfusion/ej2-
 import { world_map } from '~/constants/world_map';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 import { account } from '~/appwrite/client';
+import { useNavigate } from 'react-router';
 
 // get countries from a public api
 export const loader = async () => {
     const response = await fetch("https://restcountries.com/v3.1/all?fields=flag,name,latlng,maps");
     const data = await response.json();
+    
 
     // console.log(data);
     // map into an array of necessary attributes
@@ -28,6 +30,7 @@ const CreateTrip = ({loaderData}: Route.ComponentProps) => {
     // parse into array of type Country
     const countries = loaderData as Country[];
     console.log(countries);
+    const navigate = useNavigate();
 
     // convert countries data into a format suitable for combo box
     const countryData = countries.map((country: any) => ({
@@ -86,7 +89,30 @@ const CreateTrip = ({loaderData}: Route.ComponentProps) => {
         try {
             console.log('user',user);
             console.log('trip', formData);
-            
+            const {country, duration, groupType, travelStyle, interest, budget} = formData;
+
+            // create new trip
+            const response = await fetch("/api/create-trip",{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json" 
+                },
+                body: JSON.stringify({
+                    country,
+                    duration,
+                    groupType,
+                    travelStyle,
+                    interest,
+                    budget,
+                    userId: user.$id
+                })
+            });
+
+            const data: CreateTripResponse = await response.json();
+            if (data?.id){
+                navigate(`/trips/${data.id}`);
+            }
+            else throw new Error("Failed to create AI generated trip.");
         } catch (error) {
             console.error("Error generating new trip:",error);
         } finally{
