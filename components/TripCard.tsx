@@ -35,7 +35,7 @@ const TripCard = ({
             </figure>
         </article>
 
-        <div className='mt-5 pl-[18px] pr-3.5 pb-5'>
+        <div className='mt-5 px-3 pb-5'>
             <ChipListComponent id="travel-chip">
                 <ChipsDirective>
                     {tags.map((tag,index) => (

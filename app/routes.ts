@@ -9,6 +9,7 @@ export default [
         route('dashboard','routes/admin/dashboard.tsx'),
         route('users','routes/admin/users.tsx'),
         route('trips','routes/admin/trips.tsx'),
-        route('trips/create','routes/admin/create-trip.tsx')
+        route('trips/create','routes/admin/create-trip.tsx'),
+        route('trips/:tripId','routes/admin/trip-details.tsx')
     ])
 ] satisfies RouteConfig;
